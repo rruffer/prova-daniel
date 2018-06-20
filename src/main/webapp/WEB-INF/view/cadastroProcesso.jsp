@@ -4,7 +4,7 @@
 
 <h3>User Registration</h3>
 <br>
-<form action='/add' method='post'>
+<form action='/pesquisa' method='get'>
  
     <table class='table table-hover table-responsive table-bordered'>
  
