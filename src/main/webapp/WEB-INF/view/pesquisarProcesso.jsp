@@ -6,13 +6,13 @@
 <div class="panel panel-default">
     <div class="panel-heading">
 				<div class="clearfix">
-					<h1 class="panel-title aw-titulo-panel">Novo Título</h1>
-					<a class="btn btn-link aw-link-panel" href="/irpesquisar">Pesquisar processo</a>
+					<h1 class="panel-title aw-titulo-panel">Pesquisar Processo</h1>
+					<a class="btn btn-link aw-link-panel" href="/irbusca">Novo processo</a>
 				</div>
 
     </div>
     <div class="panel-body">
-<form action='/buscar' method='get'>
+<form action='/pesquisar' method='get'>
 
 	<table class='table table-hover table-responsive table-bordered'>
 
@@ -20,7 +20,7 @@
 			<td><b>N pub</b></td>
 			<td><input type='text' name='pub' class='form-control' required /></td>
 			<td>
-				<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+				<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>  Buscar</button>
 			</td>
 		</tr>
 
@@ -49,12 +49,6 @@
 			<td><b>Título:</b></td>
 			<td><form:input type='text' cssClass="form-control" cssStyle="size: 20" path="titulo" readonly="true"/></td>
 		</tr>
-		<tr>
-			<td colspan="2">
-				<button id="btn-cadastrar" type="submit" class="btn btn-primary btn-lg btn-block"><i class="fa fa-floppy-o"></i> Salvar</button>
-			</td>
-		</tr>
-		
 
 	</table>
 </form:form>

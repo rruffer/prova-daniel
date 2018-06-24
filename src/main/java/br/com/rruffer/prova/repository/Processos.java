@@ -13,6 +13,6 @@ import br.com.rruffer.prova.model.Processo;
  */
 public interface Processos extends JpaRepository<Processo, Long>{
 	
-	//List<Processo> findByDescricaoContaining(String descricao);
+	Processo findByPubContaining(String pub);
 
 }

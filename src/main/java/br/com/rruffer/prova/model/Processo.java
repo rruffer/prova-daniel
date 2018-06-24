@@ -36,8 +36,8 @@ public class Processo {
 	@Column(name = "PRO_DAT_DT_PUBLICACAO")
 	private Date dataPublicacao;
 
-	@OneToMany(mappedBy = "requerente")
-	private Set<Requerente> requerentes;
+	@Column(name = "PRO_STR_DS_REQUERENTE")
+	private String requerente;
 
 	@Column(name = "PRO_STR_DS_TITULO")
 	private String titulo;
@@ -86,12 +86,12 @@ public class Processo {
 		this.titulo = titulo;
 	}
 
-	public Set<Requerente> getRequerentes() {
-		return requerentes;
+	public String getRequerente() {
+		return requerente;
 	}
 
-	public void setRequerentes(Set<Requerente> requerentes) {
-		this.requerentes = requerentes;
+	public void setRequerente(String requerente) {
+		this.requerente = requerente;
 	}
 
 }

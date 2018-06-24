@@ -25,4 +25,9 @@ public class ProcessoService {
 		}
 	}
 
+	public Processo buscarPub(String pub) {
+		Processo processo = processos.findByPubContaining(pub);
+		return processo;
+	}
+
 }
