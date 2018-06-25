@@ -3,6 +3,8 @@ package br.com.rruffer.prova.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -78,7 +80,7 @@ public class ProcessoController {
 
 	private Processo getDadosProcesso(String pub) {
 		
-		Processo dadosProcesso = new Processo();
+		Processo processo = new Processo();
 		
 		String url = "https://patentscope.wipo.int/search/pt/detail.jsf?docId=" + pub.replace("/", "") + "&redirectedID=true";
 
@@ -87,55 +89,38 @@ public class ProcessoController {
 		try {
 			HttpGet request = new HttpGet(url);
 
-			// add request header
-			// request.addHeader("User-Agent", USER_AGENT);
 			HttpResponse response = client.execute(request);
 
 			if(response.getStatusLine().getStatusCode() == HttpStatus.OK.value()) {
 				System.out.println("Response Code : " + response.getStatusLine().getStatusCode());				
 			}
 			
-			BufferedReader rd;
-			rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-
-			StringBuffer result = new StringBuffer();
+			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 			String line = "";
+			
 			while ((line = rd.readLine()) != null) {
 				if(line.contains("detailPCTtableWO")) {
-					//dadosProcesso.setPub(line.replaceAll("\\<.*?\\>", "").trim());
-					dadosProcesso.setPub(Jsoup.parse(line).text().replace("/", ""));
-					System.out.println(dadosProcesso.getPub());
+					processo.setPub(Jsoup.parse(line).text().replace("/", ""));
 				}else if(line.contains("detailPCTtableAN")) {
-					dadosProcesso.setPedidoInternacional(Jsoup.parse(line).text().replace("/", ""));
-					System.out.println(dadosProcesso.getPedidoInternacional());
+					processo.setPedidoInternacional(Jsoup.parse(line).text().replace("/", ""));
 				}else if(line.contains("detailPCTtablePubDate")) {
-//					String[] a = dataPublicacao.split("[.]");
-					String[] a = Jsoup.parse(line).text().split(Pattern.quote("."));
-					int dia = Integer.parseInt(a[0]);
-					int mes = Integer.parseInt(a[1]);
-					int ano = Integer.parseInt(a[2]);
-					//LocalDate dateee = LocalDate.of(ano, mes, dia);
-					Date date = new Date(ano, mes, dia);
-					
-					dadosProcesso.setDataPublicacao(date);
-					System.out.println(dadosProcesso.getDataPublicacao());
+					System.out.println(line);
+					processo.setDataPublicacao(new SimpleDateFormat("dd/MM/yyyy").parse(Jsoup.parse(line).text().replace(".", "/")));
 				}else if(line.contains("PCTapplicants")) {
-					dadosProcesso.setRequerente(Jsoup.parse(line).text());			
-					System.out.println(dadosProcesso.getRequerente());
+					processo.setRequerente(Jsoup.parse(line).text());			
 				}else if(line.contains("PCTtitle")) {
-					dadosProcesso.setTitulo(Jsoup.parse(line).text());
-					System.out.println(dadosProcesso.getTitulo());
+					processo.setTitulo(Jsoup.parse(line).text());
 				}
 				
-				result.append(line);
 			}
-			
-		//System.out.println(result);
 			
 		} catch (UnsupportedOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
@@ -147,7 +132,7 @@ public class ProcessoController {
         }
 
 
-		return dadosProcesso;
+		return processo;
 	}
 
 }
