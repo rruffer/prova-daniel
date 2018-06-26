@@ -19,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rruffer.prova.model.Processo;
@@ -71,12 +73,20 @@ public class ProcessoController {
 		return model;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/pesquisaAjax/{pub}", method = RequestMethod.GET)
+	public Processo pesquisaAjax(@PathVariable String pub) {
+		Processo response = processoService.buscarPub(pub);
+		return response;
+	}
+	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView next(@ModelAttribute("processo") Processo processo) {
 		ModelAndView model = new ModelAndView("cadastroProcesso");
 		processoService.salvar(processo);
 		return model;
 	}
+	
 
 	private Processo getDadosProcesso(String pub) {
 		

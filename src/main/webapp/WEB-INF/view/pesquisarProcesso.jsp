@@ -18,9 +18,9 @@
 
 		<tr>
 			<td><b>N pub</b></td>
-			<td><input type='text' name='pub' class='form-control' required /></td>
+			<td><input id="id-pub" type='text' name='pub' class='form-control' required /></td>
 			<td>
-				<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>  Buscar</button>
+				<a type="submit" class="btn btn-primary btn-ajax" href="/pesquisaAjax/${pub}"><i class="fa fa-search"></i>  Pesquisar</a>
 			</td>
 		</tr>
 
@@ -28,27 +28,36 @@
 </form>
 <form:form id="frmForm" action='/add' method='post'  modelAttribute="processo">
 	<table class='table table-hover table-responsive table-bordered'>
-		<tr>
-			<td><b>N pub</b></td>
-			<td><form:input type='text' cssClass="form-control" cssStyle="size: 20" path="pub" readonly="true"/></td>
-		</tr>
-		<tr>
-			<td><b>N do pedido internacional</b></td>
-			<td><form:input type='text' cssClass="form-control" cssStyle="size: 20" path="pedidoInternacional" readonly="true"/></td>
-		</tr>
-		<tr>
-			<td><b>Data de publicaÃ§Ã£o:</b></td>
-			<td><form:input type='text' cssClass="form-control" cssStyle="size: 20" path="dataPublicacao" readonly="true"/></td>
+				<tr>
+					<td><b>N pub</b></td>
+					<td><form:input id="pub" type='text' cssClass="form-control"
+							cssStyle="size: 20" path="pub" readonly="true" /></td>
+				</tr>
+				<tr>
+					<td><b>N do pedido internacional</b></td>
+					<td><form:input id="pedidoInternacional" type='text'
+							cssClass="form-control" cssStyle="size: 20"
+							path="pedidoInternacional" readonly="true" /></td>
+				</tr>
+				<tr>
+					<td><b>Data de publicação:</b></td>
+					<td><form:input id="dataPublicacao" type='text'
+							cssClass="form-control" cssStyle="size: 20" path="dataPublicacao"
+							readonly="true" /></td>
 
-		</tr>
-		<tr>
-			<td><b>Requerente:</b></td>
-			<td><form:input type='text' cssClass="form-control" cssStyle="size: 20" path="requerente" readonly="true"/></td>
-		</tr>
-		<tr>
-			<td><b>TÃ­tulo:</b></td>
-			<td><form:input type='text' cssClass="form-control" cssStyle="size: 20" path="titulo" readonly="true"/></td>
-		</tr>
+				</tr>
+				<tr>
+					<td><b>Requerente:</b></td>
+					<td><form:input id="requerente" type='text'
+							cssClass="form-control" cssStyle="size: 20" path="requerente"
+							readonly="true" /></td>
+				</tr>
+				<tr>
+					<td><b>Título:</b></td>
+					<td><form:input id="titulo" type='text'
+							cssClass="form-control" cssStyle="size: 20" path="titulo"
+							readonly="true" /></td>
+				</tr>
 
 	</table>
 </form:form>
